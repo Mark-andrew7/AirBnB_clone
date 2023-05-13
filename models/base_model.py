@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from datetime import datetime
 import uuid
+import models
 
 
 class BaseModel:
@@ -19,7 +20,8 @@ class BaseModel:
         """
         print class name and attributes
         """
-        print("[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__))
+        print("[{}] ({}) {}".format(self.__class__.__name__,
+                                    self.id, self.__dict__))
 
     def save(self):
         """
@@ -44,12 +46,13 @@ class BaseModel:
         if kwargs is not None:
             for k, v in kwargs.items():
                 if k == "created_at":
-                    v = datetime.strptime(v, %Y-%m-%dT%H:%M:%S.%f)
+                    v = datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
                 if k == "updated_at":
-                    v = datetime.strptime(v, %Y-%m-%dT%H:%M:%S.%f)
+                    v = datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
                 if k != "__class__":
                     setattr(self, k, v)
                 else:
                     self.id = str(uuid.uuid4)
                     self.created_at = datetime.now()
                     self.updated_at = datetime.now()
+                    models.storage.new(self)
