@@ -40,7 +40,6 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         cls_name = args[0]
-
         try:
             Class = self.Classes[cls_name]
             inst = Class()
@@ -49,7 +48,6 @@ class HBNBCommand(cmd.Cmd):
         except NameError:
             print("** class doesn't exist **")
 
-    
     def do_show(self, line):
         """
         print string representation of an instance
@@ -59,7 +57,7 @@ class HBNBCommand(cmd.Cmd):
         obj_dict = storage.all()
         if len(args) == 0:
             print("** class name missing **")
-        
+
         cls_name = args[0]
         if cls_name not in self.Classes:
             print("** class doesn't exist **")
@@ -73,7 +71,6 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
         print(obj_dict[key])
-
 
 
 if __name__ == '__main__':
