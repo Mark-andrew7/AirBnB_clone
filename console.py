@@ -13,7 +13,7 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = '(hbnb)'
     Classes = {
-        "BaseModel": BaseModel
+        "BaseModel"
     }
 
     def do_quit(self, line):
@@ -41,15 +41,15 @@ class HBNBCommand(cmd.Cmd):
         args = line.split()
         if len(args) == 0:
             print("** class name missing **")
-            return
-        cls_name = args[0]
         try:
-            Class = self.Classes[cls_name]
-            inst = Class()
+            cls_name = args[0]
+            if cls_name not in self.Classes:
+                print("** class doesn't exist **")
+            inst = eval(cls_name)()
             inst.save()
             print(inst.id)
-        except NameError:
-            print("** class doesn't exist **")
+        except Exception:
+            pass
 
     def do_show(self, line):
         """
