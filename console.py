@@ -2,11 +2,14 @@
 import cmd
 from models.base_model import BaseModel
 from models import storage
+import shlex
+import sys
+import models
 
 
 class HBNBCommand(cmd.Cmd):
     """
-    class defination
+    class defination of the cmd module
     """
     prompt = '(hbnb)'
     Classes = {
@@ -53,24 +56,65 @@ class HBNBCommand(cmd.Cmd):
         print string representation of an instance
         based on class name and id
         """
-        args = line.split()
-        obj_dict = storage.all()
+        args = shlex.split(line)
+        obj_dict = models.storage.all()
         if len(args) == 0:
             print("** class name missing **")
-
-        cls_name = args[0]
-        if cls_name not in self.Classes:
-            print("** class doesn't exist **")
-
-        if len(args) == 1:
+        elif len(args) == 1:
             print("** instance id missing **")
+        elif args[0] not in self.Classes:
+            print("** class doesn't exist **")
+        else:
+            K = args[0] + '.' + args[1]
+            if K in obj_dict:
+                print(obj_dict[K])
+            else:
+                print("** no instance found **")
+        return
 
-        inst_id = args[1]
-        key = "{} {}".format(cls_name, inst_id)
-        if key not in obj_dict:
-            print("** no instance found **")
+    def destroy(self, line):
+        """
+        deletes instance based on class name and id
+        """
+        args = shlex.split(line)
+        if len(args) == 0:
+            print("** class name missing **")
+        elif len(args) == 1:
+            print("** instance id missing **")
+        elif args[0] not in self.Classes:
+            print("** class doesn't exist **")
+        else:
+            obj_dict = models.storage.all()
+            K = args[0] + '.' + args[1]
+            if K in obj_dict:
+                del obj_dic[K]
+                models.storage.all()
+            else:
+                print("** no instance found **")
 
-        print(obj_dict[key])
+    def all(self, line):
+        """
+        prints all str representation of all instances
+        """
+        args = shlex.split(line)
+        obj_str = []
+        obj_dict = models.storage.all()
+        if len(args) == 0:
+            for K in obj_dict:
+                str_rep = str(obj_dict[K])
+                obj_str.append(str_rep)
+            print(obj_str)
+
+        if args[0] not in self.Classes:
+            print("** class doesn't exist **")
+        else:
+            obj_str = []
+            for K in obj_dict:
+                cls_name = K.split('0')
+                if cls_name[0] == args[0]:
+                    str_rep = str(obj_dict[K])
+                    obj_str.append(str_rep)
+            print(obj_str)
 
 
 if __name__ == '__main__':
