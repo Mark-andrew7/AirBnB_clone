@@ -44,7 +44,7 @@ class BaseModel:
         """
         returns dictionaries representing all keys/values
         """
-        dict_cpy = self.__dict__.copy
+        dict_cpy = self.__dict__.copy()
         dict_cpy["created_at"] = self.created_at.isoformat()
         dict_cpy["updated_at"] = self.updated_at.isoformat()
         dict_cpy["__class__"] = self.__class__.__name__
