@@ -7,7 +7,7 @@ import sys
 import models
 from models.user import User
 from models.state import State
-from models.state import City
+from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
@@ -19,12 +19,12 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = '(hbnb)'
     Classes = {
-        "BaseModel"
-        "User"
-        "State"
-        "City"
-        "Amenity"
-        "Place"
+        "BaseModel",
+        "User",
+        "State",
+        "City",
+        "Amenity",
+        "Place",
         "Review"
     }
 
@@ -38,6 +38,7 @@ class HBNBCommand(cmd.Cmd):
         """
         Quit command to exit the program
         """
+        print()
         return True
 
     def emptyline(line):
@@ -84,7 +85,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
         return
 
-    def destroy(self, line):
+    def do_destroy(self, line):
         """
         deletes instance based on class name and id
         """
@@ -104,7 +105,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
-    def all(self, line):
+    def do_all(self, line):
         """
         prints all str representation of all instances
         """
