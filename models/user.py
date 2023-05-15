@@ -7,7 +7,6 @@ class User(BaseModel):
     user class inheriting from basemodel
     """
     email = ""
-    password =""
+    password = ""
     first_name = ""
     last_name = ""
-

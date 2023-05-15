@@ -6,6 +6,11 @@ import shlex
 import sys
 import models
 from models.user import User
+from models.state import State
+from models.state import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -16,6 +21,11 @@ class HBNBCommand(cmd.Cmd):
     Classes = {
         "BaseModel"
         "User"
+        "State"
+        "City"
+        "Amenity"
+        "Place"
+        "Review"
     }
 
     def do_quit(self, line):
