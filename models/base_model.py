@@ -18,8 +18,6 @@ class BaseModel:
                     v = datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
                 if k == "updated_at":
                     v = datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
-                if k == "id":
-                    self.id = v
                 if k != "__class__":
                     setattr(self, k, v)
                 else:
@@ -40,6 +38,7 @@ class BaseModel:
         updates updated_at with the current time
         """
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """
