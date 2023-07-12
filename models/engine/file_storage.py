@@ -46,9 +46,11 @@ class FileStorage:
         """
         try:
             with open(self.__file_path, 'r', encoding='UTF-8') as f:
-                cls_name = k.split('.')
-                Class = eval(cls_name)
-                instance = Class(**v)
-                self.__objects[k] = instance
+                data = json.load(f)
+                for k, v in data.items():
+                    cls_name = k.split('.')
+                    Class = eval(cls_name[0])
+                    instance = Class(**v)
+                    self.__objects[k] = instance
         except FileNotFoundError:
             pass

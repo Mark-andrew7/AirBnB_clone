@@ -103,7 +103,7 @@ class HBNBCommand(cmd.Cmd):
             obj_dict = models.storage.all()
             K = args[0] + '.' + args[1]
             if K in obj_dict:
-                del obj_dic[K]
+                del obj_dict[K]
                 models.storage.all()
             else:
                 print("** no instance found **")
@@ -131,6 +131,48 @@ class HBNBCommand(cmd.Cmd):
                     str_rep = str(obj_dict[K])
                     obj_str.append(str_rep)
             print(obj_str)
+
+    def do_update(self, line):
+        """
+        updates instance based on class name and id
+        """
+        args = shlex.split(line)
+        if len(args) == 0:
+            print("** class name missing **")
+
+        cls_name = args[0]
+        if cls_name not in self.Classes:
+            print("** class doesn't exist **")
+        if len(args) == 1:
+            print("** instance id missing **")
+
+        inst = args[1]
+        obj_dict = models.storage.all()
+        K = args[0] + '.' + args[1]
+        if K not in obj_dict:
+            print("** no instance found **")
+
+        if len(args) == 2:
+            print("** attribute name missing **")
+
+        attr_name = args[2]
+        if attr_name == "id" or attr_name == "created_at" or attr_name == "updated_at":
+            print("** attribute cannot be updated **")
+
+        if len(args) == 3:
+            print("** value missing **")
+
+        attr_val = args[3]
+        attr_type = type(getattr(obj_dict[K], attr_name))
+
+        try:
+            result = attr_type(attr_val)
+            setattr(obj_dict[K], attr_name, result)
+            models.storage.save()
+        except ValueError:
+            print("** Value not found **")
+
+        models.storage.reload()
 
 
 if __name__ == '__main__':

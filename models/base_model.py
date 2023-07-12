@@ -30,7 +30,7 @@ class BaseModel:
         """
         print class name and attributes
         """
-        print("[{}] ({}) {}".format(self.__class__.__name__,
+        return ("[{}] ({}) {}".format(self.__class__.__name__,
                                     self.id, self.__dict__))
 
     def save(self):
