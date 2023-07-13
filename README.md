@@ -1,5 +1,5 @@
 # 0x00. AirBnB clone - The console
-`Group project` `Python` `OOP`
+`Group project` `Python` `OOP` <br>
 An implementation to know and understand how the airbnb project works
 
 ## Tasks
@@ -16,7 +16,7 @@ An implementation to know and understand how the airbnb project works
   - A database or files that store data (data == objects)
   - An API that provides a communication interface between the front-end and your data (retrieve, create, delete, update them)
 
-  **First Part - The console**
+**First Part - The console**
 - Create your data model
 - manage (create, update, destroy, etc) objects via a console / command interpreter
 - store and persist objects to a file (JSON file)
@@ -26,7 +26,6 @@ An implementation to know and understand how the airbnb project works
 - This abstraction will also allow you to change the type of storage easily without updating all of your codebase.
 - The console will be a tool to validate this storage engine.
 
-![Alt text](c:/Users/Fred_rick/Documents/Downloads/815046647d23428a14ca.png)
 #### More Info
 **Description of the command line interpreter**
 - command line interpreter that allows users to interact through command lines.Users interact with a system.
