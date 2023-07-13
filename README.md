@@ -5,7 +5,7 @@ An implementation to know and understand how the airbnb project works
 ![alt text](pics/hbnb.png)
 
 ## Tasks
-##### 0. **README, AUTHORS** <br>
+#### 0. **README, AUTHORS** <br>
 *mandatory*
 - Write a README.md:
 - description of the project
@@ -64,16 +64,16 @@ Displays more information of the command
 
 - You should use branches and pull requests on GitHub - it will help you as team to organize your work
 
-##### 1. **Be pycodestyle compliant!** <br>
+#### 1. **Be pycodestyle compliant!** <br>
 *mandatory*
 - Write beautiful code that passes the pycodestyle checks.
 
-##### 2. **Unittests** <br>
+#### 2. **Unittests** <br>
 *mandatory*
 - All your files, classes, functions must be tested with unit tests
 - Unit tests must also pass in non-interactive mode:
 
-##### 3. **BaseModel** <br>
+#### 3. **BaseModel** <br>
 *mandatory*
 - Write a class BaseModel that defines all common attributes/methods for other classes
 - models/base_model.py
@@ -94,7 +94,7 @@ Displays more information of the command
    - you can use isoformat() of datetime object
 - This method will be the first piece of the serialization/deserialization process: create a dictionary representation with "simple object type" of our BaseModel
 
-##### 4. **Create BaseModel from dictionary** <br>
+#### 4. **Create BaseModel from dictionary** <br>
 *mandatory*
 - re-create an instance with this dictionary representation.
 ```Python
@@ -111,7 +111,7 @@ Displays more information of the command
 - otherwise:
 - create id and created_at as you did previously (new instance)
 
-##### 5. **Store first object** <br>
+#### 5. **Store first object** <br>
 *mandatory*
 - Now we can recreate a BaseModel from another one by using a dictionary representation
 ```Python
@@ -144,7 +144,7 @@ Displays more information of the command
     - __init__(self, *args, **kwargs):
       - if it’s a new instance (not from a dictionary representation), add a call to the method new(self) on storage
 
-##### 6. **Console 0.0.1** <br>
+#### 6. **Console 0.0.1** <br>
 *mandatory* <br>
 Write a program called `console.py` that contains the entry point of the command interpreter:
 - You must use the module `cmd`
@@ -181,7 +181,7 @@ guillaume@ubuntu:~/AirBnB$
 ```
 **No unittests needed**
 
-##### 7. Console 0.1
+#### 7. Console 0.1
 **mandatory**
 
 Update your command interpreter (console.py) to have these commands:
