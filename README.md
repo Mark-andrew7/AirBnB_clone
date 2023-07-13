@@ -94,7 +94,7 @@ Displays more information of the command
    - you can use isoformat() of datetime object
 - This method will be the first piece of the serialization/deserialization process: create a dictionary representation with "simple object type" of our BaseModel
 
-4. **Create BaseModel from dictionary**
+4. **Create BaseModel from dictionary** <br>
 *mandatory*
 - re-create an instance with this dictionary representation.
 ```Python
@@ -145,7 +145,7 @@ Displays more information of the command
       - if it’s a new instance (not from a dictionary representation), add a call to the method new(self) on storage
 
 6. **Console 0.0.1** <br>
-*mandatory*
+*mandatory* <br>
 Write a program called `console.py` that contains the entry point of the command interpreter:
 - You must use the module `cmd`
 - Your class definition must be: `class HBNBCommand(cmd.Cmd):`
