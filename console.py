@@ -116,19 +116,17 @@ class HBNBCommand(cmd.Cmd):
         obj_str = []
         obj_dict = models.storage.all()
         if len(args) == 0:
-            for K in obj_dict:
-                str_rep = str(obj_dict[K])
+            for obj in obj_dict.values():
+                str_rep = str(obj)
                 obj_str.append(str_rep)
             print(obj_str)
 
         if args[0] not in self.Classes:
             print("** class doesn't exist **")
         else:
-            obj_str = []
-            for K in obj_dict:
-                cls_name = K.split('0')
-                if cls_name[0] == args[0]:
-                    str_rep = str(obj_dict[K])
+            for obj in obj_dict.values():
+                if obj.__class__.__name__ == args[0]:
+                    str_rep = str(obj)
                     obj_str.append(str_rep)
             print(obj_str)
 
@@ -173,6 +171,24 @@ class HBNBCommand(cmd.Cmd):
             print("** Value not found **")
 
         models.storage.reload()
+
+    def do_count(self, line):
+        """
+        retrieves number of instances of a class
+        """
+        args = shlex.split(line)
+        if len(args) == 1:
+            cls_name = args[0]
+        else:
+            cls_name = args[0] + '.' + args[1]
+
+        count = 0
+        obj_dict = models.storage.all()
+        for obj in obj_dict.values():
+            if obj.__class__.__name__ == cls_name:
+                count += 1
+
+        print(count)
 
 
 if __name__ == '__main__':
