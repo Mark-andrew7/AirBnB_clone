@@ -156,7 +156,9 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
 
         attr_name = args[2]
-        if attr_name == "id" or attr_name == "created_at" or attr_name == "updated_at":
+        if attr_name == "id"\
+            or attr_name == "created_at"\
+                or attr_name == "updated_at":
             print("** attribute cannot be updated **")
 
         if len(args) == 3:
