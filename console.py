@@ -137,28 +137,36 @@ class HBNBCommand(cmd.Cmd):
         args = shlex.split(line)
         if len(args) == 0:
             print("** class name missing **")
+            return
 
         cls_name = args[0]
         if cls_name not in self.Classes:
             print("** class doesn't exist **")
+            return
+
         if len(args) == 1:
             print("** instance id missing **")
+            return
 
         inst = args[1]
         obj_dict = models.storage.all()
         K = args[0] + '.' + args[1]
         if K not in obj_dict:
             print("** no instance found **")
+            return
 
         if len(args) == 2:
             print("** attribute name missing **")
+            return
 
         attr_name = args[2]
         if attr_name == "id" or attr_name == "created_at" or attr_name == "updated_at":
-            print("** attribute cannot be updated **")
+            print("** attribute id, created_at and updated_at cannot be updated  **")
+            return
 
         if len(args) == 3:
             print("** value missing **")
+            return
 
         attr_val = args[3]
         attr_type = type(getattr(obj_dict[K], attr_name))
