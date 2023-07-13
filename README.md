@@ -226,3 +226,5 @@ Update your command interpreter (console.py) to have these commands:
     * Each arguments are separated by a space
     * A string argument with a space must be between double quote
     * The error management starts from the first argument to the last one
+
+**No unittests needed**
