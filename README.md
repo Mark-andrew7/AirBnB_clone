@@ -30,9 +30,7 @@ An implementation to know and understand how the airbnb project works
 - This abstraction will also allow you to change the type of storage easily without updating all of your codebase.
 - The console will be a tool to validate this storage engine.
 
-<br>
 ![alt text](pics/console.png)
-<br>
 
 #### More Info
 **Description of the command line interpreter**
