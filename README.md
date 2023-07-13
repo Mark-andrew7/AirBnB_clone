@@ -1,9 +1,11 @@
 # 0x00. AirBnB clone - The console
 `Group project` `Python` `OOP` <br>
 An implementation to know and understand how the airbnb project works
+
 <br>
 ![alt text](pics/hbnb.png)
 <br>
+
 ## Tasks
 0. **README, AUTHORS** <br>
 *mandatory*
@@ -27,9 +29,11 @@ An implementation to know and understand how the airbnb project works
 - This means: from your console code (the command interpreter itself) and from the front-end and RestAPI you will build later, you won't have to pay attention (take care) of how your objects are stored
 - This abstraction will also allow you to change the type of storage easily without updating all of your codebase.
 - The console will be a tool to validate this storage engine.
+
 <br>
 ![alt text](pics/console.png)
 <br>
+
 #### More Info
 **Description of the command line interpreter**
 - command line interpreter that allows users to interact through command lines.Users interact with a system.
