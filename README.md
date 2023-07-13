@@ -2,6 +2,8 @@
 `Group project` `Python` `OOP` <br>
 An implementation to know and understand how the airbnb project works
 
+https://user-images.githubusercontent.com/106999219/253185562-4ddbab60-bc9f-4c08-93a0-2f6a0aa1516c.png
+
 ## Tasks
 0. **README, AUTHORS** <br>
 *mandatory*
