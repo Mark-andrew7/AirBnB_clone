@@ -2,9 +2,7 @@
 `Group project` `Python` `OOP` <br>
 An implementation to know and understand how the airbnb project works
 
-<br>
 ![alt text](pics/hbnb.png)
-<br>
 
 ## Tasks
 0. **README, AUTHORS** <br>
