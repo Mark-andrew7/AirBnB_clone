@@ -31,6 +31,53 @@ class HBNBCommand(cmd.Cmd):
         "Review"
     }
 
+    """
+    Parsing the input to figure out whether it's a 'class.method'
+    pattern or not. If so, we can then match the method to a corresponding
+    'do_<method>'
+    """
+    def do_BaseModel(self, arg):
+        """Interprets BaseModel"""
+        self.parser("BaseModel", arg)
+
+    def do_User(self, arg):
+        """Interprets User"""
+        self.parser("User", arg)
+
+    def do_State(self, arg):
+        """Interprets State"""
+        self.parser("State", arg)
+
+    def do_City(self, arg):
+        """Interprets City"""
+        self.parser("City", arg)
+
+    def do_Amenity(self, arg):
+        """Interprets Amenity"""
+        self.parser("Amenity", arg)
+
+    def do_Place(self, arg):
+        """Interprets Place"""
+        self.parser("Place", arg)
+
+    def do_Review(self, arg):
+        """Interprets Review"""
+        self.parser("Review", arg)
+
+    def parser(self, cls, arg):
+        """Parses command line"""
+        try:
+            argSplit = arg.split('.')
+            command = argSplit[1].split('(')[0]
+            if command == "all":
+                self.do_all(cls)
+            elif command == "count":
+                self.do_count(cls)
+            else:
+                print("** command doesn't exist **")
+        except Exception as e:
+            print(e)
+
     def do_quit(self, line):
         """
         Quit command to exit the program
@@ -108,27 +155,38 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
-    def do_all(self, line):
+    def do_all(self, line=None):
         """
         prints all str representation of all instances
         """
-        args = shlex.split(line)
         obj_str = []
         obj_dict = models.storage.all()
-        if len(args) == 0:
+        if not line:
+            """
+            Case scenario when method is called from the parser
+            print objects of the class only
+            """
             for obj in obj_dict.values():
                 str_rep = str(obj)
                 obj_str.append(str_rep)
             print(obj_str)
-
-        if args[0] not in self.Classes:
-            print("** class doesn't exist **")
         else:
-            for obj in obj_dict.values():
-                if obj.__class__.__name__ == args[0]:
+            """Case scenario when called from console and line
+            is present. E.g 'all Basemodel'"""
+            args = shlex.split(line)
+            if len(args) == 0:
+                for obj in obj_dict.values():
                     str_rep = str(obj)
                     obj_str.append(str_rep)
             print(obj_str)
+            if args[0] not in self.Classes:
+                print("** class doesn't exist **")
+            else:
+                for obj in obj_dict.values():
+                    if obj.__class__.__name__ == args[0]:
+                        str_rep = str(obj)
+                        obj_str.append(str_rep)
+                print(obj_str)
 
     def do_update(self, line):
         """

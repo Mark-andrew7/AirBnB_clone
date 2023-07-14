@@ -228,3 +228,103 @@ Update your command interpreter (console.py) to have these commands:
     * The error management starts from the first argument to the last one
 
 **No unittests needed**
+
+#### 8. First User
+**mandatory**
+- Write a class User that inherits from BaseModel:
+  - models/user.py
+- Public class attributes:
+  - email: string - empty string
+  - password: string - empty string
+  - first_name: string - empty string
+  - last_name: string - empty string
+- Update `FileStorage`` to manage correctly serialization and deserialization of User.
+- Update your command interpreter `(console.py)` to allow `show`, `create`, `destroy`, `update` and `all` used with `User`.
+
+**No unittests needed for the console**
+
+#### 9. More classes!
+
+**mandatory**
+
+Write all those classes that inherit from BaseModel:
+
+* **State** (models/state.py):
+    * Public class attributes:
+        * name: string - empty string
+* **City** (models/city.py):
+    * Public class attributes:
+        * state_id: string - empty string: it will be the State.id
+        * name: string - empty string
+* **Amenity** (models/amenity.py):
+    * Public class attributes:
+        * name: string - empty string
+* **Place** (models/place.py):
+    * Public class attributes:
+        * city_id: string - empty string: it will be the City.id
+        * user_id: string - empty string: it will be the User.id
+        * name: string - empty string
+        * description: string - empty string
+        * number_rooms: integer - 0
+        * number_bathrooms: integer - 0
+        * max_guest: integer - 0
+        * price_by_night: integer - 0
+        * latitude: float - 0.0
+        * longitude: float - 0.0
+        * amenity_ids: list of string - empty list: it will be the list of Amenity.id later
+* **Review** (models/review.py):
+    * Public class attributes:
+        * place_id: string - empty string: it will be the Place.id
+        * user_id: string - empty string: it will be the User.id
+        * text: string - empty string
+**No unittests needed for the console**
+
+#### 10. Console 1.0
+**mandatory** <br>
+- Update `FileStorage` to manage correctly serialization and deserialization of all our new classes: Place, State, City, Amenity and Review.
+- Update your command interpreter (console.py) to allow those actions: show, create, destroy, update and all with all classes created previously.<br>
+**Enjoy your first console!**<br>
+**No unittests needed for the console**
+
+#### 11. All instances by class name
+**advanced** <br>
+- Update your command interpreter (`console.py`) to retrieve all instances of a class by using: `<class name>.all()`
+**No unittests needed for the console**
+
+#### 12. Count instances
+**advanced** <br>
+- Update your command interpreter (`console.py``) to retrieve the number of instances of a class: `<class name>.count()`.
+**No unittests needed for the console**
+
+#### 13. Show
+**advanced** <br>
+- Update your command interpreter (`console.py`) to retrieve an instance based on its ID: `<class name>.show(<id>)`.
+**Errors management must be the same as previously.**
+**No unittests needed for the console**
+
+#### 14. Destroy
+**advanced** <br>
+- Update your command interpreter (`console.py`) to destroy an instance based on his ID: `<class name>.destroy(<id>)`.
+**Errors management must be the same as previously.**
+**No unittests needed for the console**
+
+#### 15. Update
+**advanced** <br>
+- Update your command interpreter (`console.py`) to update an instance based on his ID: `<class name>.update(<id>, <attribute name>, <attribute value>)`.
+**Errors management must be the same as previously.**
+**No unittests needed for the console**
+
+#### 16. Update from dictionary
+**advanced** <br>
+- Update your command interpreter (`console.py`) to update an instance based on his ID with a dictionary: `<class name>.update(<id>, <dictionary representation>)`.
+**Errors management must be the same as previously.**
+**No unittests needed for the console**
+
+#### 17. Unittests for the Console!
+**advanced** <br>
+- Write all unittests for `console.py`, **all features!**
+- For testing the console, you should “intercept” STDOUT of it, we **highly** recommend you to use:
+```python
+with patch('sys.stdout', new=StringIO()) as f:
+    HBNBCommand().onecmd("help show")
+```
