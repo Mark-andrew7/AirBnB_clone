@@ -104,7 +104,7 @@ class HBNBCommand(cmd.Cmd):
             K = args[0] + '.' + args[1]
             if K in obj_dict:
                 del obj_dict[K]
-                models.storage.all()
+                models.storage.save()
             else:
                 print("** no instance found **")
 
