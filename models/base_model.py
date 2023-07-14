@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-from datetime import datetime
 import uuid
 import models
+from datetime import datetime
 
 
 class BaseModel:
@@ -30,8 +30,8 @@ class BaseModel:
         """
         print class name and attributes
         """
-        return ("[{}] ({}) {}".format(self.__class__.__name__,
-                                    self.id, self.__dict__))
+        return ("[{}] ({}) {}"
+                .format(self.__class__.__name__, self.id, self.__dict__))
 
     def save(self):
         """
