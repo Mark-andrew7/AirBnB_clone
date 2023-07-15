@@ -243,8 +243,10 @@ class HBNBCommand(cmd.Cmd):
                     setattr(obj_dict[K], attr, value)
         else:
             attr_name = args[2]
-            if attr_name == "id" or attr_name == "created_at" or attr_name == "updated_at":
-                print("** attribute id, created_at and updated_at cannot be updated  **")
+            if attr_name == "id" or attr_name == "created_at"\
+                    or attr_name == "updated_at":
+                print("** attribute id, created_at and\
+                      updated_at cannot be updated  **")
                 return
             if len(args) == 3:
                 print("** value missing **")
@@ -276,6 +278,7 @@ class HBNBCommand(cmd.Cmd):
                 count += 1
 
         print(count)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
