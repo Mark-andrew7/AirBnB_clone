@@ -20,6 +20,7 @@ class Test_BaseModel(unittest.TestCase):
 
     def tearDown(self):
         """Tear down"""
+        self.model = None
         self.storage = None
         self.my_model = None
 
@@ -134,4 +135,3 @@ class Test_BaseModel(unittest.TestCase):
             self.storage.reload()
         except Exception as e:
             self.fail("test_reload failed: {}".format(str(e)))
-
