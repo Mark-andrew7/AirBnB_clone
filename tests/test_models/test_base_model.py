@@ -1,8 +1,11 @@
 #!/usr/bin/python3
 """ Unit Test for BaseModel """
-import unittest
 import datetime
+import os
+import unittest
 import time
+from models import storage
+from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 
 
@@ -12,10 +15,13 @@ class Test_BaseModel(unittest.TestCase):
     def setUp(self):
         """set up"""
         self.model = BaseModel()
+        self.storage = FileStorage()
+        self.my_model = BaseModel()
 
     def tearDown(self):
         """Tear down"""
-        pass
+        self.storage = None
+        self.my_model = None
 
     def test_initiation(self):
         """Testing if the model is correctly created"""
@@ -48,6 +54,9 @@ class Test_BaseModel(unittest.TestCase):
         time.sleep(0.001)
         self.model.save()
         self.assertNotEqual(before_save, self.model.updated_at)
+        """Test that 'save' method serializes objects to JSON file"""
+        self.my_model.save()
+        self.assertTrue(os.path.exists(self.storage._FileStorage__file_path))
 
     def test_str(self):
         """Test if __str__ is working and of correct format"""
@@ -107,3 +116,22 @@ class Test_BaseModel(unittest.TestCase):
         self.assertTrue(isinstance(model.id, str))
         self.assertTrue(hasattr(model, "created_at"))
         self.assertTrue(isinstance(model.created_at, datetime.datetime))
+
+    def test_new(self):
+        """Test that 'new' method adds objects to __objects"""
+        initial_storage_state = storage.all().copy()
+        new_obj = BaseModel()
+        storage.new(new_obj)
+        new_storage_state = storage.all()
+
+        new_key = "{}.{}".format(type(new_obj).__name__, new_obj.id)
+        self.assertNotEqual(initial_storage_state, new_storage_state)
+        self.assertTrue(new_key in new_storage_state)
+
+    def test_reload(self):
+        """Test that 'reload' method deserializes JSON files to __objects"""
+        try:
+            self.storage.reload()
+        except Exception as e:
+            self.fail("test_reload failed: {}".format(str(e)))
+
