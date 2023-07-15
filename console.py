@@ -160,8 +160,10 @@ class HBNBCommand(cmd.Cmd):
             return
 
         attr_name = args[2]
-        if attr_name == "id" or attr_name == "created_at" or attr_name == "updated_at":
-            print("** attribute id, created_at and updated_at cannot be updated  **")
+        if attr_name == "id" or attr_name == "created_at" or \
+                attr_name == "updated_at":
+            print("** attribute id, created_at and updated_at "
+                  "cannot be updated  **")
             return
 
         if len(args) == 3:
