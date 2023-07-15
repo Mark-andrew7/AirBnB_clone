@@ -1,8 +1,8 @@
 #!/usr/bin/python3
+""" Unit Test for BaseModel """
 import unittest
 import datetime
 import time
-from models import base_model
 from models.base_model import BaseModel
 
 
@@ -72,20 +72,3 @@ class Test_BaseModel(unittest.TestCase):
         """Test if the '__class__' is present and correct"""
         self.assertTrue(model_dict.get('__class__'))
         self.assertEqual(model_dict['__class__'], 'BaseModel')
-
-
-my_model = BaseModel()
-my_model.name = "My First Model"
-my_model.my_number = 89
-print(my_model)
-my_model.save()
-print(my_model)
-my_model_json = my_model.to_dict()
-print(my_model_json)
-print("JSON of my_model:")
-for key in my_model_json.keys():
-    print("\t{}: ({}) - {}"
-          .format(key, type(my_model_json[key]), my_model_json[key]))
-
-if __name__ == "__main__":
-    unittest.main()
