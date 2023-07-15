@@ -7,6 +7,7 @@ from models.base_model import BaseModel
 from models import storage
 import shlex
 import sys
+import re
 import models
 from models.user import User
 from models.state import State
@@ -80,9 +81,9 @@ class HBNBCommand(cmd.Cmd):
                 id = argSplit[1].split('"')[1]
                 self.do_destroy(cls + " " + id)
             elif command == "update":
-                id = argSplit[1].split('"')[1]
-                attr_name = argSplit[1].split('"')[3]
-                attr_value = argSplit[1].split('"')[5]
+                id = re.split('"|\'', argSplit[1])[1]
+                attr_name = re.split('"|\'', argSplit[1])[3]
+                attr_value = re.split('"|\'', argSplit[1])[5]
                 self.do_update(cls + " "
                                + id + " " + attr_name + " "
                                + attr_value)
@@ -214,6 +215,7 @@ class HBNBCommand(cmd.Cmd):
         """
         updates instance based on class name and id
         """
+        print(f"line: {line}")
         args = shlex.split(line)
         if len(args) == 0:
             print("** class name missing **")
