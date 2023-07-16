@@ -105,6 +105,13 @@ class HBNBCommand(cmd.Cmd):
         print()
         return True
 
+    def do_help(self, line):
+        """
+            Get help on commands>
+            Usage: help <command>
+        """
+        cmd.Cmd.do_help(self,line)
+
     def emptyline(line):
         """
         plus enter doesnt execute anything
@@ -208,6 +215,8 @@ class HBNBCommand(cmd.Cmd):
         updates instance based on class name and id
         """
         args = shlex.split(line)
+        models.storage.reload()
+        obj_dict = models.storage.all()
         if len(args) == 0:
             print("** class name missing **")
             return
@@ -219,7 +228,6 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
         inst = args[1]
-        obj_dict = models.storage.all()
         K = args[0] + '.' + args[1]
         if K not in obj_dict:
             print("** no instance found **")
@@ -227,30 +235,17 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 2:
             print("** attribute name or dictionary missing **")
             return
-        if isinstance(args[2], dict):
-            attr_dict = args[2]
-            for attr, value in attr_dict.items():
-                if attr not in ['id', 'created_at', 'updated_at']:
-                    setattr(obj_dict[K], attr, value)
-        else:
-            attr_name = args[2]
-            if attr_name == "id" or attr_name == "created_at"\
-                    or attr_name == "updated_at":
-                print("** attribute id, created_at and\
-                      updated_at cannot be updated  **")
-                return
-            if len(args) == 3:
-                print("** value missing **")
-                return
-            attr_val = args[3]
-            attr_type = type(getattr(obj_dict[K], attr_name))
-            try:
-                result = attr_type(attr_val)
-                setattr(obj_dict[K], attr_name, result)
-            except ValueError:
-                print("** Value not found **")
+        if len(args) == 3:
+            print("** value missing **")
+            return
+        attr_val = args[3]
+        if hasattr(obj_dict[K], args[2]):
+            x = type(getattr(obj_dict[K], args[2]))
+            setattr(obj_dict[K], args[2], x(args[3]))
             models.storage.save()
-            models.storage.reload()
+        else:
+            setattr(obj_dict[K], args[2], args[3])
+            models.storage.save()
 
     def do_count(self, line):
         """
