@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-""" Unit Test for console """
+""" Unit Test for review """
 import unittest
 import models
 
 
 class Test_BaseModel(unittest.TestCase):
-    """Test cases for console """
+    """Test cases for review"""
     pass
