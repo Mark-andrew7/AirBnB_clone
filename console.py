@@ -110,7 +110,7 @@ class HBNBCommand(cmd.Cmd):
             Get help on commands>
             Usage: help <command>
         """
-        cmd.Cmd.do_help(self,line)
+        cmd.Cmd.do_help(self, line)
 
     def emptyline(line):
         """
