@@ -21,7 +21,7 @@ class HBNBCommand(cmd.Cmd):
     """
     class defination of the cmd module
     """
-    prompt = '(hbnb)'
+    prompt = '(hbnb) '
     Classes = {
         "BaseModel",
         "User",
@@ -184,29 +184,21 @@ class HBNBCommand(cmd.Cmd):
         obj_dict = models.storage.all()
         if not line:
             """
-            Case scenario when method is called from the parser
-            print objects of the class only
+            Case scenario when only 'all' is called
             """
             for obj in obj_dict.values():
                 str_rep = str(obj)
                 obj_str.append(str_rep)
             print(obj_str)
         else:
-            """Case scenario when called from console and line
-            is present. E.g 'all Basemodel'"""
-            args = shlex.split(line)
-            if len(args) == 0:
-                for obj in obj_dict.values():
-                    str_rep = str(obj)
-                    obj_str.append(str_rep)
-            print(obj_str)
-
-            if args[0] not in self.Classes:
+            """Case scenario when it is called either by
+            '<class_name>.all()' or 'all <class_name'"""
+            if line not in self.Classes:
                 print("** class doesn't exist **")
                 return
             else:
                 for obj in obj_dict.values():
-                    if obj.__class__.__name__ == args[0]:
+                    if obj.__class__.__name__ == line:
                         str_rep = str(obj)
                         obj_str.append(str_rep)
                 print(obj_str)
@@ -215,7 +207,6 @@ class HBNBCommand(cmd.Cmd):
         """
         updates instance based on class name and id
         """
-        print(f"line: {line}")
         args = shlex.split(line)
         if len(args) == 0:
             print("** class name missing **")
