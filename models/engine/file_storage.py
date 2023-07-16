@@ -48,7 +48,7 @@ class FileStorage:
         """
         try:
             if path.isfile(self.__file_path):
-                with open(self.__file_path, "r", encoding = "UTF-8") as f:
+                with open(self.__file_path, "r", encoding="UTF-8") as f:
                     for k, v in json.load(f).items():
                         v = eval(v['__class__'])(**v)
                         self.__objects[k] = v
