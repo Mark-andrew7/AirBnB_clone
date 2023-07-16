@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ file storage class"""
 import json
+import os.path as path
 from models.base_model import BaseModel
 from models.user import User
 from models.place import Place
@@ -27,18 +28,18 @@ class FileStorage:
         """
         sets in object with a key
         """
-        k = obj.__class__.__name__ + "." + str(obj.id)
-        self.__objects[k] = obj
+        if obj:
+            k = '{}.{}'.format(obj.__class__.__name__, obj.id)
+            self.__objects[k] = obj
 
     def save(self):
         """
         serializes __objects to the json file
         """
         obj_dict = {}
-        for k, v in self.__objects.items():
-            obj_dict[k] = v.to_dict()
-
-        with open(self.__file_path, 'w', encoding='UTF-8') as f:
+        with open(self.__file_path, "w", encoding="UTF-8") as f:
+            for k, v in self.__objects.items():
+                obj_dict[k] = v.to_dict()
             json.dump(obj_dict, f)
 
     def reload(self):
@@ -46,12 +47,10 @@ class FileStorage:
         deserializes json file to __objects file
         """
         try:
-            with open(self.__file_path, 'r', encoding='UTF-8') as f:
-                data = json.load(f)
-                for k, v in data.items():
-                    cls_name = k.split('.')
-                    Class = eval(cls_name[0])
-                    instance = Class(**v)
-                    self.__objects[k] = instance
+            if path.isfile(self.__file_path):
+                with open(self.__file_path, "r", encoding = "UTF-8") as f:
+                    for k, v in json.load(f).items():
+                        v = eval(v['__class__'])(**v)
+                        self.__objects[k] = v
         except FileNotFoundError:
             pass
