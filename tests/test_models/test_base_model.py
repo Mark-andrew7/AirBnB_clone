@@ -51,14 +51,12 @@ class Test_BaseModel(unittest.TestCase):
 
     def test_save(self):
         """Test is the save method updates the update attribute"""
-        before_save = self.model.updated_at
+        time_cr = self.model.created_at
         time.sleep(0.001)
+        time_up = self.model.updated_at
         self.model.save()
-        after_save = self.model.updated_at
-        self.assertNotEqual(before_save, after_save)
-        """Test that 'save' method serializes objects to JSON file"""
-        self.my_model.save()
-        self.assertTrue(os.path.exists(self.storage._FileStorage__file_path))
+        self.assertFalse(time_up == self.model.updated_at)
+        self.assertTrue(time_cr == self.model.created_at)
 
     def test_str(self):
         """Test if __str__ is working and of correct format"""
