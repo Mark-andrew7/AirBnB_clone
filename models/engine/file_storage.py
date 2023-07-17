@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ file storage class"""
 import json
+import os.path as path
 from models.base_model import BaseModel
 from models.user import User
 from models.place import Place
@@ -42,16 +43,12 @@ class FileStorage:
             json.dump(obj_dict, file)
 
     def reload(self):
-        """
-        deserializes json file to __objects file
-        """
+        """convert existing json  dicts to instances"""
         try:
-            with open(self.__file_path, "r", encoding="UTF-8") as f:
-                data = json.load(f)
-                for k, v in data.items():
-                    cls_name = k.split(".")
-                    cls = eval(cls_name[0])
-                    v = cls(**v)
-                    self.__objects[k] = v
+            if path.isfile(self.__file_path):
+                with open(self.__file_path, mode="r", encoding='UTF-8') as f:
+                    for key, value in json.load(f).items():
+                        value = eval(value['__class__'])(**value)
+                        self.__objects[key] = value
         except FileNotFoundError:
             pass
