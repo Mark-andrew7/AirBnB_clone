@@ -54,7 +54,8 @@ class Test_BaseModel(unittest.TestCase):
         before_save = self.model.updated_at
         time.sleep(0.001)
         self.model.save()
-        self.assertNotEqual(before_save, self.model.updated_at)
+        after_save = self.model.updated_at
+        self.assertNotEqual(before_save, after_save)
         """Test that 'save' method serializes objects to JSON file"""
         self.my_model.save()
         self.assertTrue(os.path.exists(self.storage._FileStorage__file_path))

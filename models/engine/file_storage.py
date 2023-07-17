@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ file storage class"""
 import json
-import os.path as path
 from models.base_model import BaseModel
 from models.user import User
 from models.place import Place
@@ -37,20 +36,23 @@ class FileStorage:
         serializes __objects to the json file
         """
         obj_dict = {}
-        with open(self.__file_path, "w", encoding="UTF-8") as f:
-            for k, v in self.__objects.items():
-                obj_dict[k] = v.to_dict()
-            json.dump(obj_dict, f)
+        for k, v in self.__objects.items:
+            obj_dict[k] = v.to_dict()
+
+        with open(self.__file_path, "w", encoding="UTF-8") as file:
+            json.dump(obj_dict, file)
 
     def reload(self):
         """
         deserializes json file to __objects file
         """
         try:
-            if path.isfile(self.__file_path):
-                with open(self.__file_path, "r", encoding = "UTF-8") as f:
-                    for k, v in json.load(f).items():
-                        v = eval(v['__class__'])(**v)
-                        self.__objects[k] = v
+            with open(self.__file_path, "r", encoding="UTF-8") as file:
+                data = json.load(file)
+                for k, v in data.items():
+                    cls_name = k.split('.')
+                    Class = eval(cls_name[0])
+                    instance = Class(**v)
+                    self.__objects[k] = instance
         except FileNotFoundError:
             pass
