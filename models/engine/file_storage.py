@@ -47,12 +47,12 @@ class FileStorage:
         deserializes json file to __objects file
         """
         try:
-            with open(self.__file_path, "r", encoding="UTF-8") as file:
-                data = json.load(file)
-                for k, v in data.items():
-                    cls_name = k.split('.')
-                    Class = eval(cls_name[0])
-                    instance = Class(**v)
-                    self.__objects[k] = instance
+            with open(self.__file_path, "r", encoding="UTF-8") as f:
+                    data = json.load(f)
+                    for k, v in data.items():
+                        cls_name = k.split(".")
+                        cls = eval(cls_name[0])
+                        v = cls(**v)
+                        self.__objects[k] = v
         except FileNotFoundError:
             pass
