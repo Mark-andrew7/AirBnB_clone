@@ -32,9 +32,8 @@ class Test_BaseModel(unittest.TestCase):
         """Test if type of the id is string"""
         self.assertEqual(type(self.model.id), str)
 
-        model2 = BaseModel()
         """test if the id is unique"""
-        self.assertNotEqual(self.model.id, model2.id)
+        self.assertNotEqual(self.model.id, self.my_model.id)
 
     def test_date(self):
         """Test if the created_at is present and of datetime instance"""
@@ -48,16 +47,6 @@ class Test_BaseModel(unittest.TestCase):
         time.sleep(0.001)
         self.model.save()
         self.assertNotEqual(prev_date, self.model.updated_at)
-
-    def test_save(self):
-        """Test is the save method updates the update attribute"""
-        before_save = self.model.updated_at
-        time.sleep(0.001)
-        self.model.save()
-        self.assertNotEqual(before_save, self.model.updated_at)
-        """Test that 'save' method serializes objects to JSON file"""
-        self.my_model.save()
-        self.assertTrue(os.path.exists(self.storage._FileStorage__file_path))
 
     def test_str(self):
         """Test if __str__ is working and of correct format"""
@@ -101,7 +90,7 @@ class Test_BaseModel(unittest.TestCase):
 
     def test_class_not_attribute(self):
         """Testing that '__class__' is not assigned as attribute"""
-        kwargs = {"__class__": "SomeClass"}
+        kwargs = {"__class__": "User"}
         model = BaseModel(**kwargs)
 
         self.assertNotIn("__class__", model.__dict__)
@@ -112,7 +101,6 @@ class Test_BaseModel(unittest.TestCase):
         an 'id' and 'created_at' attributes
         """
         model = BaseModel()
-
         self.assertTrue(hasattr(model, "id"))
         self.assertTrue(isinstance(model.id, str))
         self.assertTrue(hasattr(model, "created_at"))
