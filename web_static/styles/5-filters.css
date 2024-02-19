@@ -1,17 +1,18 @@
-.filters > .locations {
+.filters {
+  display: flex;
   height: 100%;
-  width: 25%;
-  border-right: #DDDDDD solid 1px;
-  margin-left: 30px;
 }
 
-.filters > .amenities {
-  height: 100%;
+.locations, .amenities {
   width: 25%;
-  margin-left: 30px;
+  padding: 0 10px;
 }
 
-.container .filters .locations h3 {
+.locations:first-child {
+  border-right: 1px solid #DDDDDD;
+}
+
+h3 {
   font-weight: 600;
 }
 
